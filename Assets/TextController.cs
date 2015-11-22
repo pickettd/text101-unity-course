@@ -80,11 +80,11 @@ public class TextController : MonoBehaviour {
 
 #region State handler methods
 	void state_cell() {
-		text.text = "You have woken up in a prison cell. " +
-					"You see a hand mirror, the door lock, " +
+		text.text = "You have woken up in a prison cell.\n" +
+                    "You see a hand mirror, the door lock,\n" +
 					"and bed sheets.\n\n" +
-					"[M to look at the mirror, L to look at the " +
-					"lock, or S to inspect the sheets]";
+                    "[M to look at the mirror,\nL to look at the " +
+                    "lock, or\nS to inspect the sheets]";
 		if (Input.GetKeyDown(KeyCode.M)) {
 			myState = States.mirror;
 		}
@@ -98,7 +98,7 @@ public class TextController : MonoBehaviour {
 
 	void state_mirror() {
 		text.text = "You see a small hand mirror - could be handy.\n\n" +
-			"[T to take the mirror, R to return to looking around your cell]";
+            "[T to take the mirror or\nR to return to looking around your cell]";
 		if (Input.GetKeyDown(KeyCode.T)) {
 			myState = States.cell_mirror;
 		}
@@ -108,7 +108,7 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_lock_0() {
-		text.text = "You see a giant rusty lock on the door. If you could see the reverse side "+
+		text.text = "You see a giant rusty lock on the door.\nIf you could see the reverse side\n" +
 		"of the lock, maybe you could figure out a way to free yourself.\n\n" +
 			"[R to return to looking around your cell]";
 		if (Input.GetKeyDown(KeyCode.R)) {
@@ -117,9 +117,9 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_lock_1() {
-		text.text = "You look closely at the lock. Using the hand mirror you can see "+
+		text.text = "You look closely at the lock.\nUsing the hand mirror you can see\n" +
 			"that there is a simple unlock mechanism on the reverse side.\n\n" +
-				"[U to unlock the door and exit the cell, R to return to looking around your cell]";
+				"[U to unlock the door and exit the cell,\nR to return to looking around your cell]";
 		if (Input.GetKeyDown(KeyCode.U)) {
 			myState = States.corridor_0;
 		}
@@ -145,11 +145,11 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_cell_mirror() {
-		text.text = "You're still in a prison cell. But now you have a hand mirror." +
+		text.text = "You're still in a prison cell.\nBut now you have a hand mirror.\n" +
 					"You see the door lock and " +
 					"bed sheets.\n\n" +
 					"[L to look at the " +
-					"lock or S to inspect the sheets]";
+                    "lock or\nS to inspect the sheets]";
 
 		if (Input.GetKeyDown(KeyCode.L)) {
 			myState = States.lock_1;
@@ -160,7 +160,7 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_freedom() {
-		text.text = "You sneak past the guards and now you're FREE! " +
+		text.text = "You sneak past the guards and now you're FREE!\n" +
 					"Congratulations you have won the game!!\n\n" +
 					"[P to play again]";
 		if (Input.GetKeyDown(KeyCode.P)) {
@@ -169,11 +169,11 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_corridor_0() {
-		text.text = "You are now in a prison corridor. " +
-					"You see stairs going up, " +
-					"a closet door, " +
+		text.text = "You are now in a prison corridor.\n" +
+                    "You see stairs going up,\n" +
+					"a closet door,\n" +
 					"and a small pile of trash on the floor\n\n" +
-					"[S to go up the stairs, C to try the closet door, or T to check the trash]";
+                    "[S to go up the stairs\nC to try the closet door, or\nT to check the trash]";
 		if (Input.GetKeyDown(KeyCode.S)) {
 			myState = States.stairs_0;
 		}
@@ -186,10 +186,10 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_corridor_1() {
-		text.text = "You are still in a prison corridor. But now you have a makeshift lockpick. " +
+		text.text = "You are still in a prison corridor.\nBut now you have a makeshift lockpick.\n" +
 					"You see stairs going up and " +
 					"a closet door.\n\n" +
-					"[S to go up the stairs or C to open the closet with your lockpick]";
+                    "[S to go up the stairs or\nC to open the closet with your lockpick]";
 		if (Input.GetKeyDown(KeyCode.S)) {
 			myState = States.stairs_1;
 		}
@@ -199,10 +199,10 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_corridor_2() {
-		text.text = "You are still in a prison corridor. " +
-					"You see stairs going up and " +
+		text.text = "You are still in a prison corridor.\n" +
+                    "You see stairs going up and\n" +
 					"an open closet with employee clothes inside.\n\n" +
-					"[S to go up the stairs or C to re-enter the closet]";
+                    "[S to go up the stairs or\nC to re-enter the closet]";
 		if (Input.GetKeyDown(KeyCode.S)) {
 			myState = States.stairs_2;
 		}
@@ -212,10 +212,10 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_corridor_3() {
-		text.text = "You are still in a corridor. But now you are wearing a disguise. " +
-					"You see stairs going up and  " +
+		text.text = "You are still in a corridor.\nBut now you are wearing a disguise.\n" +
+                    "You see stairs going up and\n" +
 					"an open closet for uniforms.\n\n" +
-					"[S to go up the stairs or U to take off the uniform and go back in the closet]";
+					"[S to go up the stairs or\nU to take off the uniform and go back in the closet]";
 		if (Input.GetKeyDown(KeyCode.S)) {
 			myState = States.freedom;
 		}
@@ -225,8 +225,8 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_stairs_0() {
-		text.text = "You start to go up the stairs. " +
-					"But you hear people and know that they will arrest you! " +
+		text.text = "You start to go up the stairs.\n" +
+                    "But you hear people and know that they will arrest you!\n" +
 					"You have no choice but to go back down the stairs.\n\n" +
 					"[D to go back down the stairs]";
 		if (Input.GetKeyDown(KeyCode.D)) {
@@ -235,8 +235,8 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_stairs_1() {
-		text.text = "You again start to go up the stairs. " +
-					"But you still hear people and STILL know that they will arrest you! " +
+		text.text = "You again start to go up the stairs.\n" +
+                    "But you still hear people and STILL know that they will arrest you!\n" +
 					"You still have no choice but to go back down the stairs.\n\n" +
 					"[D to go back down the stairs]";
 		if (Input.GetKeyDown(KeyCode.D)) {
@@ -245,9 +245,9 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_stairs_2() {
-		text.text = "You again start to go up the stairs. " +
-					"But you still hear people and STILL know that they will arrest you! " +
-					"You need some sort of disguise.... " +
+		text.text = "You again start to go up the stairs.\n" +
+                    "But you still hear people and STILL know that they will arrest you!\n" +
+                    "You need some sort of disguise....\n" +
 					"You still have no choice right now but to go back.\n\n" +
 					"[D to go back down the stairs]";
 		if (Input.GetKeyDown(KeyCode.D)) {
@@ -256,7 +256,7 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_closet_door() {
-		text.text = "You inspect the closet door. It looks like it would contain employee clothing. " +
+		text.text = "You inspect the closet.\nIt looks like it would contain employee clothing.\n" +
 					"It is locked but you think the lock is pretty simple.\n\n" +
 					"[C to continue looking around the corridor]";
 		if (Input.GetKeyDown(KeyCode.C)) {
@@ -265,8 +265,8 @@ public class TextController : MonoBehaviour {
 	}
 
 	void state_floor() {
-		text.text = "You inspect the trash. It looks like there is a bobby pin you could use as a lockpick.\n\n" +
-					"[C to continue looking around the corridor or L to take the lockpick and clean up the trash]";
+		text.text = "You inspect the trash.\nIt looks like there is a bobby pin you could use as a lockpick.\n\n" +
+					"[C to continue looking around the corridor or\nL to take the lockpick and clean up the trash]";
 		if (Input.GetKeyDown(KeyCode.C)) {
 			myState = States.corridor_0;
 		}
@@ -277,7 +277,7 @@ public class TextController : MonoBehaviour {
 
 	void state_in_closet() {
 		text.text = "You are in a closet with employee clothes.\n\n" +
-			"[C to continue looking around the corridor or D to disguise yourself with a uniform]";
+            "[C to continue looking around the corridor or\nD to disguise yourself with a uniform]";
 		if (Input.GetKeyDown(KeyCode.C)) {
 			myState = States.corridor_2;
 		}
