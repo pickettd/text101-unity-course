@@ -5,14 +5,27 @@ using System.Collections;
 public class TextController : MonoBehaviour {
 
 	public Text text;
+	//private TouchScreenKeyboard keyboard;
+	public int storySelection;
+
 	private enum States {
 		cell, mirror, sheets_0, lock_0, cell_mirror, sheets_1, lock_1, corridor_0, 
 		corridor_1, corridor_2, corridor_3, stairs_0, stairs_1, stairs_2, closet_door, floor, in_closet, freedom
 	}
 	private States myState;
 
+	public void pushButton1() {
+		storySelection = 1;
+	}
+	public void pushButton2() {
+		storySelection = 2;
+	}
+	public void pushButton3() {
+		storySelection = 3;
+	}
 	// Use this for initialization
 	void Start () {
+		//keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
 		myState = States.cell;
 	
 	}
@@ -76,6 +89,7 @@ public class TextController : MonoBehaviour {
 		else if (myState == States.freedom) {
 			state_freedom();
 		}
+		storySelection = 0;
 	}
 
 #region State handler methods
@@ -85,13 +99,13 @@ public class TextController : MonoBehaviour {
 					"and bed sheets.\n\n" +
                     "[M to look at the mirror,\nL to look at the " +
                     "lock, or\nS to inspect the sheets]";
-		if (Input.GetKeyDown(KeyCode.M)) {
+		if ((Input.GetKeyDown(KeyCode.M))||(storySelection == 1)) {
 			myState = States.mirror;
 		}
-		else if (Input.GetKeyDown(KeyCode.L)) {
+		else if ((Input.GetKeyDown(KeyCode.L))||(storySelection == 2)) {
 			myState = States.lock_0;
 		}
-		else if (Input.GetKeyDown(KeyCode.S)) {
+		else if ((Input.GetKeyDown(KeyCode.S))||(storySelection == 3)) {
 			myState = States.sheets_0;
 		}
 	}
@@ -99,10 +113,10 @@ public class TextController : MonoBehaviour {
 	void state_mirror() {
 		text.text = "You see a small hand mirror - could be handy.\n\n" +
             "[T to take the mirror or\nR to return to looking around your cell]";
-		if (Input.GetKeyDown(KeyCode.T)) {
+		if ((Input.GetKeyDown(KeyCode.T))||(storySelection == 1)) {
 			myState = States.cell_mirror;
 		}
-		else if (Input.GetKeyDown(KeyCode.R)) {
+		else if ((Input.GetKeyDown(KeyCode.R))||(storySelection == 2)) {
 			myState = States.cell;
 		}
 	}
@@ -111,7 +125,7 @@ public class TextController : MonoBehaviour {
 		text.text = "You see a giant rusty lock on the door.\nIf you could see the reverse side\n" +
 		"of the lock, maybe you could figure out a way to free yourself.\n\n" +
 			"[R to return to looking around your cell]";
-		if (Input.GetKeyDown(KeyCode.R)) {
+		if ((Input.GetKeyDown(KeyCode.R))||(storySelection == 1)) {
 			myState = States.cell;
 		}
 	}
@@ -120,10 +134,10 @@ public class TextController : MonoBehaviour {
 		text.text = "You look closely at the lock.\nUsing the hand mirror you can see\n" +
 			"that there is a simple unlock mechanism on the reverse side.\n\n" +
 				"[U to unlock the door and exit the cell,\nR to return to looking around your cell]";
-		if (Input.GetKeyDown(KeyCode.U)) {
+		if ((Input.GetKeyDown(KeyCode.U))||(storySelection == 1)) {
 			myState = States.corridor_0;
 		}
-		else if (Input.GetKeyDown(KeyCode.R)) {
+		else if ((Input.GetKeyDown(KeyCode.R))||(storySelection == 2)) {
 			myState = States.cell_mirror;
 		}
 	}
@@ -131,15 +145,15 @@ public class TextController : MonoBehaviour {
 	void state_sheets_0() {
 		text.text = "You see ordinary bed sheets.\n\n" +
 			"[R to return to looking around your cell]";
-		if (Input.GetKeyDown(KeyCode.R)) {
+		if ((Input.GetKeyDown(KeyCode.R))||(storySelection == 1)) {
 			myState = States.cell;
 		}
 	}
 
 	void state_sheets_1() {
 		text.text = "You STILL see ordinary bed sheets.\n\n" +
-			"[R to stop inspecting the sheets]";
-		if (Input.GetKeyDown(KeyCode.R)) {
+			"[S to stop inspecting the sheets]";
+		if ((Input.GetKeyDown(KeyCode.S))||(storySelection == 1)) {
 			myState = States.cell_mirror;
 		}
 	}
@@ -151,10 +165,10 @@ public class TextController : MonoBehaviour {
 					"[L to look at the " +
                     "lock or\nS to inspect the sheets]";
 
-		if (Input.GetKeyDown(KeyCode.L)) {
+		if ((Input.GetKeyDown(KeyCode.L))||(storySelection == 1)) {
 			myState = States.lock_1;
 		}
-		else if (Input.GetKeyDown(KeyCode.S)) {
+		else if ((Input.GetKeyDown(KeyCode.S))||(storySelection == 2)) {
 			myState = States.sheets_1;
 		}
 	}
@@ -163,7 +177,7 @@ public class TextController : MonoBehaviour {
 		text.text = "You sneak past the guards and now you're FREE!\n" +
 					"Congratulations you have won the game!!\n\n" +
 					"[P to play again]";
-		if (Input.GetKeyDown(KeyCode.P)) {
+		if ((Input.GetKeyDown(KeyCode.P))||(storySelection == 1)) {
 			myState = States.cell;
 		}
 	}
@@ -174,13 +188,13 @@ public class TextController : MonoBehaviour {
 					"a closet door,\n" +
 					"and a small pile of trash on the floor\n\n" +
                     "[S to go up the stairs\nC to try the closet door, or\nT to check the trash]";
-		if (Input.GetKeyDown(KeyCode.S)) {
+		if ((Input.GetKeyDown(KeyCode.S))||(storySelection == 1)) {
 			myState = States.stairs_0;
 		}
-		else if (Input.GetKeyDown(KeyCode.C)) {
+		else if ((Input.GetKeyDown(KeyCode.C))||(storySelection == 2)) {
 			myState = States.closet_door;
 		}
-		else if (Input.GetKeyDown(KeyCode.T)) {
+		else if ((Input.GetKeyDown(KeyCode.T))||(storySelection == 3)) {
 			myState = States.floor;
 		}
 	}
@@ -190,10 +204,10 @@ public class TextController : MonoBehaviour {
 					"You see stairs going up and " +
 					"a closet door.\n\n" +
                     "[S to go up the stairs or\nC to open the closet with your lockpick]";
-		if (Input.GetKeyDown(KeyCode.S)) {
+		if ((Input.GetKeyDown(KeyCode.S))||(storySelection == 1)) {
 			myState = States.stairs_1;
 		}
-		else if (Input.GetKeyDown(KeyCode.C)) {
+		else if ((Input.GetKeyDown(KeyCode.C))||(storySelection == 2)) {
 			myState = States.in_closet;
 		}
 	}
@@ -203,10 +217,10 @@ public class TextController : MonoBehaviour {
                     "You see stairs going up and\n" +
 					"an open closet with employee clothes inside.\n\n" +
                     "[S to go up the stairs or\nC to re-enter the closet]";
-		if (Input.GetKeyDown(KeyCode.S)) {
+		if ((Input.GetKeyDown(KeyCode.S))||(storySelection == 1)) {
 			myState = States.stairs_2;
 		}
-		else if (Input.GetKeyDown(KeyCode.C)) {
+		else if ((Input.GetKeyDown(KeyCode.C))||(storySelection == 2)) {
 			myState = States.in_closet;
 		}
 	}
@@ -216,10 +230,10 @@ public class TextController : MonoBehaviour {
                     "You see stairs going up and\n" +
 					"an open closet for uniforms.\n\n" +
 					"[S to go up the stairs or\nU to take off the uniform and go back in the closet]";
-		if (Input.GetKeyDown(KeyCode.S)) {
+		if ((Input.GetKeyDown(KeyCode.S))||(storySelection == 1)) {
 			myState = States.freedom;
 		}
-		else if (Input.GetKeyDown(KeyCode.U)) {
+		else if ((Input.GetKeyDown(KeyCode.U))||(storySelection == 2)) {
 			myState = States.in_closet;
 		}
 	}
@@ -229,7 +243,7 @@ public class TextController : MonoBehaviour {
                     "But you hear people and know that they will arrest you!\n" +
 					"You have no choice but to go back down the stairs.\n\n" +
 					"[D to go back down the stairs]";
-		if (Input.GetKeyDown(KeyCode.D)) {
+		if ((Input.GetKeyDown(KeyCode.D))||(storySelection == 1)) {
 			myState = States.corridor_0;
 		}
 	}
@@ -239,7 +253,7 @@ public class TextController : MonoBehaviour {
                     "But you still hear people and STILL know that they will arrest you!\n" +
 					"You still have no choice but to go back down the stairs.\n\n" +
 					"[D to go back down the stairs]";
-		if (Input.GetKeyDown(KeyCode.D)) {
+		if ((Input.GetKeyDown(KeyCode.D))||(storySelection == 1)) {
 			myState = States.corridor_1;
 		}
 	}
@@ -250,7 +264,7 @@ public class TextController : MonoBehaviour {
                     "You need some sort of disguise....\n" +
 					"You still have no choice right now but to go back.\n\n" +
 					"[D to go back down the stairs]";
-		if (Input.GetKeyDown(KeyCode.D)) {
+		if ((Input.GetKeyDown(KeyCode.D))||(storySelection == 1)) {
 			myState = States.corridor_2;
 		}
 	}
@@ -259,7 +273,7 @@ public class TextController : MonoBehaviour {
 		text.text = "You inspect the closet.\nIt looks like it would contain employee clothing.\n" +
 					"It is locked but you think the lock is pretty simple.\n\n" +
 					"[C to continue looking around the corridor]";
-		if (Input.GetKeyDown(KeyCode.C)) {
+		if ((Input.GetKeyDown(KeyCode.C))||(storySelection == 1)) {
 			myState = States.corridor_0;
 		}
 	}
@@ -267,10 +281,10 @@ public class TextController : MonoBehaviour {
 	void state_floor() {
 		text.text = "You inspect the trash.\nIt looks like there is a bobby pin you could use as a lockpick.\n\n" +
 					"[C to continue looking around the corridor or\nL to take the lockpick and clean up the trash]";
-		if (Input.GetKeyDown(KeyCode.C)) {
+		if ((Input.GetKeyDown(KeyCode.C))||(storySelection == 1)) {
 			myState = States.corridor_0;
 		}
-		else if (Input.GetKeyDown(KeyCode.L)) {
+		else if ((Input.GetKeyDown(KeyCode.L))||(storySelection == 2)) {
 			myState = States.corridor_1;
 		}
 	}
@@ -278,10 +292,10 @@ public class TextController : MonoBehaviour {
 	void state_in_closet() {
 		text.text = "You are in a closet with employee clothes.\n\n" +
             "[C to continue looking around the corridor or\nD to disguise yourself with a uniform]";
-		if (Input.GetKeyDown(KeyCode.C)) {
+		if ((Input.GetKeyDown(KeyCode.C))||(storySelection == 1)) {
 			myState = States.corridor_2;
 		}
-		else if (Input.GetKeyDown(KeyCode.D)) {
+		else if ((Input.GetKeyDown(KeyCode.D))||(storySelection == 2)) {
 			myState = States.corridor_3;
 		}
 	}
