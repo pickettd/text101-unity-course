@@ -14,15 +14,10 @@ public class TextController : MonoBehaviour {
 	}
 	private States myState;
 
-	public void pushButton1() {
-		storySelection = 1;
+	public void pushButton(int selection) {
+		storySelection = selection;
 	}
-	public void pushButton2() {
-		storySelection = 2;
-	}
-	public void pushButton3() {
-		storySelection = 3;
-	}
+
 	// Use this for initialization
 	void Start () {
 		//keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default);
